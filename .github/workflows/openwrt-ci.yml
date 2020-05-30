@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 # 
 
-name: 极路由3
+name: youku-l1c
 
 on:
 #  push:
@@ -106,7 +106,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-zerotier=n
-          CONFIG_PACKAGE_luci-app-koolproxyR=n
           CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_luci-app-frpc=y
           CONFIG_PACKAGE_luci-app-flowoffload=y
