@@ -98,7 +98,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
           CONFIG_PACKAGE_luci-app-wol=n
-          CONFIG_PACKAGE_luci-app-upnp=n
+          CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-accesscontrol=n
           CONFIG_PACKAGE_luci-app-ddns=n
           CONFIG_PACKAGE_luci-app-filetransfer=n
@@ -112,7 +112,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-tinyproxy=y
           CONFIG_PACKAGE_luci-app-syncdial=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=n
-          CONFIG_PACKAGE_luci-appluci-app-upnp=y
+          CONFIG_PACKAGE_luci-app-adbyby=n
           EOF
           
           # 关闭ipv6:
@@ -126,11 +126,11 @@ jobs:
           
           # 常用软件包:
           cat >> .config <<EOF
-          CONFIG_PACKAGE_curl=y
-          CONFIG_PACKAGE_htop=y
-          CONFIG_PACKAGE_screen=y
-          CONFIG_PACKAGE_tree=y
-          CONFIG_PACKAGE_vim-fuller=y
+          CONFIG_PACKAGE_curl=n
+          CONFIG_PACKAGE_htop=n
+          CONFIG_PACKAGE_screen=n
+          CONFIG_PACKAGE_tree=n
+          CONFIG_PACKAGE_vim-fuller=n
           CONFIG_PACKAGE_wget=y
           EOF
           
