@@ -113,6 +113,9 @@ jobs:
           CONFIG_PACKAGE_luci-app-syncdial=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=n
           CONFIG_PACKAGE_luci-app-adbyby=n
+          CONFIG_PACKAGE_luci-app-mwan3=n
+          CONFIG_PACKAGE_luci-app-mwan=n
+          CONFIG_PACKAGE_luci-app-mwan3helper=n
           EOF
           
           # 关闭ipv6:
@@ -130,7 +133,7 @@ jobs:
           CONFIG_PACKAGE_htop=n
           CONFIG_PACKAGE_screen=n
           CONFIG_PACKAGE_tree=n
-          CONFIG_PACKAGE_vim-fuller=n
+          CONFIG_PACKAGE_vim-fuller=y
           CONFIG_PACKAGE_wget=y
           EOF
           
