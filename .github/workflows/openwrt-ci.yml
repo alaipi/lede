@@ -24,7 +24,8 @@ env:
  SSH_ACTIONS: false
  TZ: Asia/Shanghai
  DIY_SH: diy.sh
- UPLOAD_COWTRANSFER: true
+ UPLOAD_COWTRANSFER: false
+ UPLOAD_WETRANSFER: true
 
 
 jobs:
@@ -134,7 +135,7 @@ jobs:
           CONFIG_PACKAGE_htop=n
           CONFIG_PACKAGE_screen=n
           CONFIG_PACKAGE_tree=n
-          CONFIG_PACKAGE_vim-fuller=y
+          CONFIG_PACKAGE_vim-fuller=n
           CONFIG_PACKAGE_wget=y
           EOF
           
@@ -148,9 +149,11 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
       - name: Compile firmware
+        id: compile
         run: |
           echo -e "$(nproc) thread build."
           make -j$(nproc) V=s
+          echo "::set-output name=status::success"
       - name: Assemble artifact
         run: |
           rm -rf ./artifact/
@@ -164,8 +167,14 @@ jobs:
           name: OpenWrt firmware
           path: ./artifact/
       - name: Upload firmware to cowtransfer
-        if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+        if: steps.complie.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
         run: |
           curl -fsSL git.io/file-transfer | sh
           ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+      - name: Upload firmware to WeTransfer
+        if: steps.compile.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
+        run: |
+          curl -fsSL git.io/file-transfer | sh
+          ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
+          echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
